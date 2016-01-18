@@ -538,6 +538,17 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "events/event" ],
 
       _this.import(json);
     });
+
+	Event.listen('requestSave', function(data) {
+	  // Parent frame has requested a project save, probably prior to closing out
+	  // the window. Start a save operation, which syncs our localStorage backup
+	  // and then pushes the project back up to parent frame.
+	  console.log('REQUESTED SAVE');
+	  _this.isSaved = false;
+	  _this.save(function() {
+	    // @fixme if we didn't actually save, trigger some kind of error callback to parent
+	  });
+	});
   }
 
   // Check for an existing project that was autosaved but not saved.
