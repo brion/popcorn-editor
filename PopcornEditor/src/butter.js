@@ -39,7 +39,8 @@ window.Butter = {
             "util/xhr", "util/lang", "util/tutorial",
             "text!default-config.json",
             "ui/widget/tooltip", "crashreporter", "core/project",
-            "util/uri", "util/mediatypes",
+            "util/uri", "util/mediatypes", 
+            "events/event",
             "util/accepted-ua", "jquery", "jquery-ui", "farbtastic"
           ],
           function(
@@ -50,7 +51,8 @@ window.Butter = {
             xhr, Lang, Tutorial,
             DEFAULT_CONFIG_JSON,
             ToolTip, CrashReporter, Project,
-            URI, MediaUtil
+            URI, MediaUtil,
+            Event
           ){
 
     var __guid = 0;
@@ -1032,6 +1034,9 @@ window.Butter = {
                     // Fire the ready event
                     _isReady = true;
                     _this.dispatch( "ready", _this );
+
+                    // hack! fire the iframe ready event
+                    Event.loaded();
                   }
 
                   if( projectBackup && projectBackup.useBackup ) {
